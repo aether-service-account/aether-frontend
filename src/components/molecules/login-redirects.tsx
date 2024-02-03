@@ -1,14 +1,29 @@
+"use client"
+
 import {Button} from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-
+import {googleProvider, firebase} from "@/firebase/config";
+import {signInWithPopup} from "@firebase/auth";
+import {useRouter} from "next/navigation";
 
 export const LoginRedirects = () => {
+    const router = useRouter()
+    const onGoogleProviderSignIn = async () => {
+        try {
+            const res = await signInWithPopup(firebase.auth, googleProvider)
+            router.push("/")
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     return <section className={"flex flex-col gap-2"}>
         <Button
             className="relative w-full"
             type="button"
             variant="outline"
+            onClick={() => void onGoogleProviderSignIn()}
         >
             <Image
                 alt="google login"
