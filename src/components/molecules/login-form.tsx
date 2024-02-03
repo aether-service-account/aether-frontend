@@ -1,5 +1,6 @@
 "use client"
 
+import {useContext} from "react"
 import {zodResolver} from "@hookform/resolvers/zod"
 import {useForm} from "react-hook-form"
 import * as z from "zod"
@@ -17,8 +18,10 @@ import {Input} from "@/components/ui/input"
 import {useToast} from "@/components/ui/use-toast"
 import {LoginRedirects} from "@/components/molecules/login-redirects";
 
-import {useCreateUserWithEmailAndPassword} from "react-firebase-hooks/auth"
-import {auth} from "@/firebase/config"
+import {signInWithEmailAndPassword} from "firebase/auth"
+import {firebase} from "@/firebase/config"
+import {useAuth} from "@/context/auth-context";
+import {useRouter} from "next/navigation";
 
 const FormSchema = z.object({
     email: z.string().email(),
@@ -27,7 +30,7 @@ const FormSchema = z.object({
 
 export const LoginForm = () => {
     const {toast} = useToast()
-    const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
+    const router = useRouter()
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -37,17 +40,17 @@ export const LoginForm = () => {
         },
     })
 
-    async function signUp(email: string, password: string) {
+    async function signIn(email: string, password: string) {
         try {
-            const res = await createUserWithEmailAndPassword(email, password)
-            console.log({res})
+            const res = await signInWithEmailAndPassword(firebase.auth, email, password)
+            router.push("/")
         } catch (e) {
             console.log(e)
         }
     }
 
     function onSubmit(data: z.infer<typeof FormSchema>) {
-        signUp(data.email, data.password)
+        signIn(data.email, data.password)
     }
 
     return <div>
