@@ -15,8 +15,8 @@ export const NavLink: React.FC<NavLink> = ({ name, link, children }) => {
         "flex text-neutral-600 text-sm gap-1 items-center hover:font-semibold",
       )}
     >
-      {name ? name : null}
       {children ? children : null}
+      {name ? name : null}
     </Link>
   );
 };
