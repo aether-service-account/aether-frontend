@@ -10,12 +10,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
 import { signOut } from "@firebase/auth";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export const AuthLink = () => {
   const { user, isLoading } = useAuth();
 
   if (isLoading) {
-    return <div className="h-6 w-6 animate-pulse rounded-full bg-gray-200" />;
+    return <div className="h-7 w-7 animate-pulse rounded-full bg-gray-200" />;
   }
 
   console.log(user);
@@ -31,24 +32,17 @@ export const AuthLink = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="overflow-hidden rounded-full">
-        {user.firebaseUser.photoURL ? (
-          <div className="h-7 w-7">
-            <Image
-              alt={user.firebaseUser.displayName ?? "User Avatar"}
-              height={48}
-              src={user.firebaseUser.photoURL ?? ""}
-              width={48}
-            />
-          </div>
-        ) : (
-          <div className="grid h-7 w-7 place-items-center bg-gray-200 text-xs">
-            {user.firebaseUser.displayName?.[0]}
-          </div>
-        )}
+        <Avatar className={"w-7 h-7"}>
+          <AvatarImage
+            src={user.firebaseUser.photoURL ?? ""}
+            alt={user.firebaseUser.displayName ?? "User Avatar"}
+          />
+          <AvatarFallback>{user.firebaseUser.displayName?.[0]}</AvatarFallback>
+        </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mx-1 w-40">
         <DropdownMenuItem>
-          <NavLink name={"Profile"} link={"/user/account/profile"}>
+          <NavLink name={"Profile"} link={"/user/profile"}>
             <User className={"h-5 w-5"} />
           </NavLink>
         </DropdownMenuItem>
