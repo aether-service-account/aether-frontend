@@ -1,78 +1,51 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-
-const FormSchema = z.object({
-  image: z.instanceof(File),
-});
+import { useState } from "react";
+import { getCookie } from "typescript-cookie";
+import __request from "@/services/__request";
 
 export function PhotoUpload() {
-  // const form = useForm<z.infer<typeof FormSchema>>({
-  //   resolver: zodResolver(FormSchema),
-  //   defaultValues: {
-  //     image: undefined,
-  //   },
-  // });
-  //
-  // function onSubmit(data: z.infer<typeof FormSchema>) {
-  //   console.log(data.image.files);
-  // }
+  const [image, setImage] = useState<File>();
+
+  function uploadPhoto() {
+    const upload = async (file: File) => {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await __request("/user/photos", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        alert("nice!");
+      }
+    };
+
+    if (image) {
+      void upload(image);
+    }
+  }
 
   return (
     <div className="grid w-full max-w-sm items-center gap-1.5">
       <Label htmlFor="picture">Photo upload</Label>
       <div className="flex gap-2">
         <Input
+          onChange={(event) => {
+            const files = event.target.files;
+            if (files) {
+              const newImage = length > 0 ? files[0] : undefined;
+              setImage(newImage);
+            }
+          }}
           id="picture"
           type="file"
           accept="image/png, image/jpeg, image/gif"
         />
-        <Button>Upload</Button>
+        <Button onClick={uploadPhoto}>Upload</Button>
       </div>
     </div>
   );
-
-  // return (
-  //   <div>
-  //     <Form {...form}>
-  //       <form
-  //         onSubmit={form.handleSubmit(onSubmit)}
-  //         className="w-full space-y-4 py-2"
-  //       >
-  //         <FormField
-  //           control={form.control}
-  //           name="image"
-  //           render={({ field }) => (
-  //             <FormItem className={""}>
-  //               <FormLabel>Email</FormLabel>
-  //               <FormControl>
-  //                 <Input
-  //                   id="picture"
-  //                   type="file"
-  //                   accept="image/png, image/jpeg, image/gif"
-  //                 />
-  //               </FormControl>
-  //               <FormMessage />
-  //             </FormItem>
-  //           )}
-  //         />
-  //
-  //         <Button type="submit" className={"w-full"}>
-  //           Submit
-  //         </Button>
-  //       </form>
-  //     </Form>
-  //   </div>
-  // );
 }

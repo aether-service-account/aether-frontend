@@ -2,7 +2,6 @@
 
 import React, {
   createContext,
-  useCallback,
   useContext,
   useEffect,
   useRef,
@@ -10,8 +9,7 @@ import React, {
 } from "react";
 import { User, Auth } from "@firebase/auth";
 import { usePathname } from "next/navigation";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { firebase } from "@/firebase/config";
+import { setCookie, removeCookie } from "typescript-cookie";
 
 type AuthContextProps = {
   user: {
@@ -30,10 +28,6 @@ export const AuthContext = createContext<AuthContextProps>({
   isLoading: true,
 });
 
-export const setCookie = (name: string, value: string) => {
-  document.cookie = `${name}=${value}; path=/; secure; SameSite=Strict;`;
-};
-
 export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   children,
   firebase,
@@ -49,12 +43,14 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
         userRef.current = undefined;
         setUser(null);
         setIsLoading(false);
-        setCookie("aether-lenz", "");
+        removeCookie("aether-lenz");
       } else {
         /*add auth check here !!! */
         /* if not valid, do signout */
         setIsLoading(false);
         setUser({ firebaseUser });
+        // @ts-ignore
+        setCookie("aether-lenz", firebaseUser.accessToken);
       }
     });
   }, [firebase.auth, pathname]);
