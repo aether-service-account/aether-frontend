@@ -54,7 +54,7 @@ export const LoginForm = () => {
   }
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    signIn(data.email, data.password);
+    void signIn(data.email, data.password);
   }
 
   return (
