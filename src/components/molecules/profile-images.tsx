@@ -17,7 +17,6 @@ export const ProfileImages = () => {
       });
 
       if (response.ok) {
-        console.log("went here");
         const data = await response.json();
         // @ts-ignore
         setImages(data.image_urls as Array<string>);

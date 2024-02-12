@@ -17,8 +17,6 @@ export const useClientAuth = ({
   const { user, isLoading } = useAuth();
   const pathname = usePathname();
 
-  console.log(user);
-
   if (isLoading) return fallback ?? <Loader />;
   if (!user)
     return (
