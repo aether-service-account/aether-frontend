@@ -1,14 +1,11 @@
 "use client";
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import { getCookie } from "typescript-cookie";
-import { Loader } from "@/components/atoms/loader";
-import { Skeleton } from "@/components/ui/skeleton";
 import { LoadingImage } from "@/components/atoms/loading-image";
 import __request from "@/services/__request";
+import { ReferenceImage } from "@/utils/types";
 
 export const ProfileImages = () => {
-  const [images, setImages] = useState<Array<string>>();
+  const [images, setImages] = useState<Array<ReferenceImage>>();
 
   useEffect(() => {
     const get_all_images = async () => {
@@ -19,7 +16,7 @@ export const ProfileImages = () => {
       if (response.ok) {
         const data = await response.json();
         // @ts-ignore
-        setImages(data.image_urls as Array<string>);
+        setImages(data as Array<ReferenceImage>);
       }
     };
 
@@ -29,9 +26,7 @@ export const ProfileImages = () => {
   return (
     <div className="grid grid-cols-4 w-full gap-3 ">
       {images
-        ? images.map((imageUrl) => (
-            <LoadingImage imageUrl={imageUrl} key={imageUrl} />
-          ))
+        ? images.map((image) => <LoadingImage image={image} key={image.key} />)
         : null}
     </div>
   );

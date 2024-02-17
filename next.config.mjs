@@ -14,7 +14,7 @@ const nextConfig = {
                 port: "",
             },            {
                 protocol: "https",
-                hostname: "aether-user-bucket.s3.ap-southeast-1.amazonaws.com",
+                hostname: "aether-user-bucket-tokyo.s3.amazonaws.com",
                 port: "",
             },
         ]

@@ -2,11 +2,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { getCookie } from "typescript-cookie";
 import __request from "@/services/__request";
+import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 export function PhotoUpload() {
   const [image, setImage] = useState<File>();
+  const { toast } = useToast();
 
   function uploadPhoto() {
     const upload = async (file: File) => {
@@ -19,7 +21,26 @@ export function PhotoUpload() {
       });
 
       if (response.ok) {
-        alert("nice!");
+        const now = new Date();
+
+        const options = {
+          weekday: "long", // Full name of the day of the week
+          year: "numeric", // Numeric year
+          month: "long", // Full name of the month
+          day: "numeric", // Numeric day of the month
+          hour: "numeric", // Numeric hour
+          minute: "numeric", // Numeric minute
+          hour12: true, // Use 12-hour time
+        };
+
+        // @ts-ignore
+        const formattedDate = now.toLocaleString("en-US", options);
+        console.log(formattedDate);
+        toast({
+          title: "Image upload",
+          description: formattedDate,
+          action: <ToastAction altText="">Undo</ToastAction>,
+        });
       }
     };
 
