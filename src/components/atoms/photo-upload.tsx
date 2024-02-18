@@ -1,53 +1,40 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import __request from "@/services/__request";
+import {useCallback, useState} from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
+import { uploadUserPhoto } from "@/services/user/images";
 
 export function PhotoUpload() {
   const [image, setImage] = useState<File>();
+
   const { toast } = useToast();
 
-  function uploadPhoto() {
-    const upload = async (file: File) => {
-      const formData = new FormData();
-      formData.append("file", file);
-
-      const response = await __request("/user/photos", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (response.ok) {
-        const now = new Date();
-
-        const options = {
-          weekday: "long", // Full name of the day of the week
-          year: "numeric", // Numeric year
-          month: "long", // Full name of the month
-          day: "numeric", // Numeric day of the month
-          hour: "numeric", // Numeric hour
-          minute: "numeric", // Numeric minute
-          hour12: true, // Use 12-hour time
+    const uploadPhoto = useCallback(() => {
+        const upload = async (file: File) => {
+            try {
+                const response = await uploadUserPhoto(file);
+                toast({
+                    title: "Photo Upload",
+                    description: response.message,
+                    // Assuming your Toast component or context expects a type or variant
+                    // type: 'success', // Uncomment or adjust based on your implementation
+                });
+            } catch (error) {
+                toast({
+                    title: "Photo Upload",
+                    description: "Upload not successful!",
+                    // type: 'error', // Uncomment or adjust based on your implementation
+                });
+            }
         };
 
-        // @ts-ignore
-        const formattedDate = now.toLocaleString("en-US", options);
-        console.log(formattedDate);
-        toast({
-          title: "Image upload",
-          description: formattedDate,
-          action: <ToastAction altText="">Undo</ToastAction>,
-        });
-      }
-    };
+        if (image) {
+            void upload(image);
+        }
+    }, [image, toast]);
 
-    if (image) {
-      void upload(image);
-    }
-  }
 
   return (
     <div className="grid w-full max-w-sm items-center gap-1.5">

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ClientWrapper } from "@/app/(main)/client-wrapper";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(inter.className)}>
         <ClientWrapper>{children}</ClientWrapper>
+        <Toaster />
       </body>
     </html>
   );

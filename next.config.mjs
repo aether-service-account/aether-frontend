@@ -12,9 +12,15 @@ const nextConfig = {
                 protocol: "https",
                 hostname: "picsum.photos",
                 port: "",
-            },            {
+            },
+            {
                 protocol: "https",
-                hostname: "aether-user-bucket-tokyo.s3.amazonaws.com",
+                hostname: "aether-users-bucket-southeast.s3.amazonaws.com",
+                port: "",
+            },
+            {
+                protocol: "https",
+                hostname: "aether-users-bucket-southeast.s3.ap-southeast-1.amazonaws.com",
                 port: "",
             },
         ]
