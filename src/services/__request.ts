@@ -7,6 +7,7 @@ async function __request<TRequest, TResponse>(
   url: string,
   data?: TRequest,
   clientHeader?: ClientHeader,
+  params?:  Record<string, any>
 ): Promise<TResponse> {
   // mutate the url
   url = `${process.env.BACKEND_API}${url}`;
@@ -17,13 +18,14 @@ async function __request<TRequest, TResponse>(
     headers: {
       ...clientHeader,
     },
+    params: params
   };
 
   try {
     const response = await axios(fullConfig);
     return response.data as TResponse;
   } catch (error) {
-    console.error("Request failed:", error);
+    console.log(fullConfig)
     throw error;
   }
 }

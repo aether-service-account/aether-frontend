@@ -18,9 +18,8 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { LoginRedirects } from "@/components/molecules/login-redirects";
 
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "@firebase/auth";
 import { firebase } from "@/firebase/config";
-import { useAuth } from "@/context/auth-context";
 import { useRouter } from "next/navigation";
 
 const FormSchema = z.object({

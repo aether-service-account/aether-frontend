@@ -23,6 +23,11 @@ const nextConfig = {
                 hostname: "aether-users-bucket-southeast.s3.ap-southeast-1.amazonaws.com",
                 port: "",
             },
+            {
+                protocol: "https",
+                hostname: "aether-collections-bucket-southeast.s3.amazonaws.com",
+                port: "",
+            },
         ]
     }
 };

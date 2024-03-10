@@ -13,14 +13,12 @@ import {deleteUserPhoto} from "@/services/user/images";
 import {useToast} from "@/components/ui/use-toast";
 import {cn} from "@/lib/utils";
 import {ReferencePhotoTooltip} from "@/components/atoms/reference-photo-tooltip";
-import {QueryClient} from "react-query/core";
-import {useMutation} from "react-query";
+import {useMutation, useQueryClient} from "react-query";
 
-export const LoadingImage: React.FC<{ image: ReferencePhoto; queryClient: QueryClient }> = ({
-                                                                                                image, queryClient,
-                                                                                            }) => {
+export const LoadingImage: React.FC<{ image: ReferencePhoto }> = ({image}) => {
     const [isLoading, setIsLoading] = useState(true);
     const {toast} = useToast();
+    const queryClient = useQueryClient();
 
 
     // useMutation hook for deleting an image
