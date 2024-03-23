@@ -19,8 +19,6 @@ export const AuthLink = () => {
     return <div className="h-7 w-7 animate-pulse rounded-full bg-gray-200" />;
   }
 
-  console.log(user);
-
   if (!user) {
     return (
       <NavLink name={"Login"} link={"/login"}>

@@ -7,9 +7,9 @@ export const NavigationBar = () => {
   return (
     <nav className={cn("flex justify-between px-3 w-full items-center")}>
       <NavLinks>
-        <NavLink name={"Home"} link={"/"} />
-        <NavLink name={"About us"} link={"/"} />
-        <NavLink name={"Contact us"} link={"/"} />
+        {/*<NavLink name={"Home"} link={"/"} />*/}
+        {/*<NavLink name={"About us"} link={"/"} />*/}
+        {/*<NavLink name={"Contact us"} link={"/"} />*/}
       </NavLinks>
       <NavLinks>
         <AuthLink />

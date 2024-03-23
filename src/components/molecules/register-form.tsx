@@ -16,7 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "@firebase/auth";
 import { firebase } from "@/firebase/config";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";

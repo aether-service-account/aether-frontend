@@ -1,39 +1,20 @@
 "use client";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { getCookie } from "typescript-cookie";
-import { Loader } from "@/components/atoms/loader";
-import { Skeleton } from "@/components/ui/skeleton";
-import { LoadingImage } from "@/components/atoms/loading-image";
-import __request from "@/services/__request";
+import {LoadingImage} from "@/components/atoms/loading-image";
+import {getUserPhotos} from "@/services/user/images";
+import {useQuery} from "react-query";
 
 export const ProfileImages = () => {
-  const [images, setImages] = useState<Array<string>>();
 
-  useEffect(() => {
-    const get_all_images = async () => {
-      const response = await __request("/user/photos", {
-        method: "GET",
-      });
+    const {data: images, error, isLoading, isError} = useQuery('reference-photos', getUserPhotos, {
+        staleTime: 600000, // 10 minutes in milliseconds
+    });
 
-      if (response.ok) {
-        console.log("went here");
-        const data = await response.json();
-        // @ts-ignore
-        setImages(data.image_urls as Array<string>);
-      }
-    };
 
-    void get_all_images();
-  }, []);
-
-  return (
-    <div className="grid grid-cols-4 w-full gap-3 ">
-      {images
-        ? images.map((imageUrl) => (
-            <LoadingImage imageUrl={imageUrl} key={imageUrl} />
-          ))
-        : null}
-    </div>
-  );
+    return (
+        <div className="grid grid-cols-4 w-full gap-3 ">
+            {!isLoading && !isError && images
+                ? images.map((image) => <LoadingImage image={image} key={image.id}/>)
+                : null}
+        </div>
+    );
 };
