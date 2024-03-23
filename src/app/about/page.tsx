@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {cn} from "@/lib/utils";
 
-export function Video() {
+const  Video = () => {
     return (
         <div className="rounded-3xl overflow-hidden w-fit h-[800px]">
             <video className="w-[900px]" preload="none" muted autoPlay loop>
@@ -12,7 +12,7 @@ export function Video() {
     )
 }
 
-export function BottomVideo(){
+const BottomVideo = () => {
     return (
         <div className="rounded-3xl overflow-hidden w-fit">
             <video className="w-full" preload="none" muted autoPlay loop>
