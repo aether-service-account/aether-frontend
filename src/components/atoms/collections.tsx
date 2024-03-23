@@ -15,7 +15,7 @@ const Collections = () => {
     } = useQuery('photographer-collections', getPhotographerCollections, {
         staleTime: 600000, // 10 minutes in milliseconds
     });
-    return <div className="grid w-full grid-cols-4 gap-2 px-10 py-6">
+    return <div className="grid w-full grid-cols-6 gap-2 px-10 py-6">
         {collections?.map((collection) => <PhotographerCollection collection={collection}/>)}
     </div>
 }

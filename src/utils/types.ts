@@ -14,6 +14,10 @@ export interface Message {
 
 export type PhotoUploadRequest = FormData;
 
+export type PhotoKeysRequest = {
+  keys: string[];
+}
+
 
 export const collectionTypes = ["event", "uncategorized"] as const;
 export type CollectionType = typeof collectionTypes[number];
@@ -22,8 +26,7 @@ export type CollectionRequest =  {
   name: string | undefined;
   description: string | undefined;
   city: string;
-  from_date: Date | undefined;
-  to_date: Date | undefined;
+  date: Date | undefined;
   type: CollectionType;
 }
 
@@ -47,6 +50,11 @@ export type CollectionResponse = {
 } & CollectionRequest
 
 
+export type UserData = {
+  id: string;
+  username: string | undefined;
+  display_name: string | undefined;
+}
 
 
 export const cities = [
