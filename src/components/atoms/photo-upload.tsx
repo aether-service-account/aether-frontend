@@ -40,7 +40,7 @@ export function PhotoUpload() {
         resolver: zodResolver(FormSchema),
     });
 
-
+    //@ts-ignore
     const addReferencePhotoMutation = useMutation((files: FileList) => uploadReferencePhotos(user?.userData.id, files), {
         onSuccess: (response) => {
             toast({
