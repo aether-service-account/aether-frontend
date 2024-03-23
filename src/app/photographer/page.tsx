@@ -18,7 +18,7 @@ import {useAuth} from "@/context/auth-context";
 import {Skeleton} from "@/components/ui/skeleton";
 import PhotographerPhotosForm from "@/components/atoms/photographer-photos-form";
 
-export function DialogDemo() {
+const DialogDemo = () => {
     return (
         <Dialog>
             <DialogTrigger asChild>
