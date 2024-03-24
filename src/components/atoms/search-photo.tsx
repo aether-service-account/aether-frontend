@@ -72,20 +72,19 @@ export default function SearchForm() {
 
     return <div className="flex">
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex  flex-col items-center gap-4">
-                <div className="flex gap-2">
-                    <FormField
-                        control={form.control}
-                        name="collection"
-                        render={({field}) => (
-                            <FormItem>
-                                <FormControl>
-                                    <Input placeholder="Event" className="w-60" {...field} />
-                                </FormControl>
-                                <FormMessage/>
-                            </FormItem>
-                        )}
-                    />
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex gap-2 items-center">
+                    {/*<FormField*/}
+                    {/*    control={form.control}*/}
+                    {/*    name="collection"*/}
+                    {/*    render={({field}) => (*/}
+                    {/*        <FormItem>*/}
+                    {/*            <FormControl>*/}
+                    {/*                <Input placeholder="Event" className="w-60" {...field} />*/}
+                    {/*            </FormControl>*/}
+                    {/*            <FormMessage/>*/}
+                    {/*        </FormItem>*/}
+                    {/*    )}*/}
+                    {/*/>*/}
                     <FormField
                         control={form.control}
                         name="city"
@@ -200,9 +199,8 @@ export default function SearchForm() {
                             </FormItem>
                         )}
                     />
-                </div>
                 <Button type="submit"
-                        className="h-12 w-44 bg-green-500  hover:bg-green-600 text-lg  flex gap-2"><UserSearch/> <span>Find Me</span></Button>
+                        className="ml-2 h-12 w-44 bg-green-500  hover:bg-green-600 text-lg  flex gap-2"><UserSearch/> <span>Find Me</span></Button>
             </form>
         </Form>
         {/*{*/}
