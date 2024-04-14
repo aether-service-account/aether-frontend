@@ -2,6 +2,7 @@
 import {useClientAuth} from "@/hooks/use-client-auth";
 import SearchForm from "@/components/atoms/search-photo";
 import Image from "next/image";
+import {Suspense} from "react";
 
 
 const CardInfo: React.FC<{ title: string; url: string; order: number; }> = ({title, url, order}) => {
@@ -38,7 +39,9 @@ export default function Home() {
             {/*empty space*/}
             <div className="py-10">
             </div>
-            <SearchForm/>
+            <Suspense>
+                <SearchForm/>
+            </Suspense>
             <div className="py-14">
             </div>
 
@@ -47,10 +50,6 @@ export default function Home() {
                 <CardInfo url="/images/photographer.jpg" title="Look for our photography captains along the way." order={2}/>
                 <CardInfo url="/images/searched-photo.jpg" title="Find photos with your face." order={3}/>
             </div>
-
-
-            {/*{ui ?? <Link href={"/search"}><Button className="gap-2 max-w-xs w-full text-lg h-12">Search Face<ScanSearch*/}
-            {/*    className="w-8 h-8"/></Button></Link>}*/}
         </main>
     );
 }
