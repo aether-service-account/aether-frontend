@@ -81,7 +81,7 @@ export async function uploadCollectionPhotos(files: FileList, collection: Collec
 }
 
 
-export async function uploadCollectionPhotosOptimized(files: FileList, collection: CollectionRequest) {
+export async function uploadCollectionPhotosOptimized(files: FileList, logos: FileList, collection: CollectionRequest) {
     if (!files) {
         return {
             message: "No image uploaded!"
@@ -94,6 +94,11 @@ export async function uploadCollectionPhotosOptimized(files: FileList, collectio
         collection,
         clientHeader,
     );
+
+    for (let i = 0; i < logos.length; i++) {
+        await clientLogoUpload(logos[i], collectionResponse.id)
+    }
+
 
     const uploadedKeys: string[] = []
     for (let i = 0; i < files.length; i++) {
@@ -165,6 +170,31 @@ async function clientCollectionUpload(file: File, id: string) {
         url: url,
         data: formData,
     };
+
+    try {
+        const response = await axios(fullConfig);
+        return key;
+    } catch (error) {
+        throw new Error("Error in uploading image!")
+    }
+}
+
+
+async function clientLogoUpload(file: File, id: string) {
+    const key = `${id}/logo.png`
+    const {fields, url} = await getPresignedCollectionPhotoPostUrl(key);
+
+    const formData = new FormData();
+    Object.entries({...fields, file}).forEach(([key, value]) => {
+        formData.append(key, value);
+    });
+
+    const fullConfig: AxiosRequestConfig = {
+        method: "post",
+        url: url,
+        data: formData,
+    };
+    console.log(key)
 
     try {
         const response = await axios(fullConfig);

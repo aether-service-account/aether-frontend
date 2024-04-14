@@ -28,6 +28,11 @@ const nextConfig = {
                 hostname: "aether-collections-bucket-southeast.s3.amazonaws.com",
                 port: "",
             },
+            {
+                protocol: "https",
+                hostname: "aether-collection-preview-photos.s3.amazonaws.com",
+                port: "",
+            },
         ]
     }
 };

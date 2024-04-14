@@ -7,17 +7,9 @@ import {ToastAction} from "@/components/ui/toast";
 import {uploadReferencePhotos, uploadUserPhoto} from "@/services/user/images";
 import {useMutation, useQueryClient} from "react-query";
 import * as z from "zod";
-import {cities, CollectionType, collectionTypes} from "@/utils/types";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
-import {cn} from "@/lib/utils";
-import {CalendarIcon, Check, ChevronsUpDown} from "lucide-react";
-import {format} from "date-fns";
-import {Calendar} from "@/components/ui/calendar";
-import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem} from "@/components/ui/command";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
+import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import {useAuth} from "@/context/auth-context";
 
 const filesSchema = typeof FileList !== 'undefined' ?

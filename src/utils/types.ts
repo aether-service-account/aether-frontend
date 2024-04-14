@@ -1,81 +1,106 @@
+import * as querystring from "node:querystring";
+
 export interface ReferencePhoto {
-  id: number;
-  url: string;
-  is_associated: string;
+    id: number;
+    url: string;
+    is_associated: string;
 }
 
 export interface ClientHeader {
-  "Access-Token": string | undefined;
+    "Access-Token": string | undefined;
 }
 
 export interface Message {
-  message: string;
+    message: string;
 }
 
 export type PhotoUploadRequest = FormData;
 
 export type PhotoKeysRequest = {
-  keys: string[];
+    keys: string[];
 }
 
 
 export const collectionTypes = ["event", "uncategorized"] as const;
 export type CollectionType = typeof collectionTypes[number];
 
-export type CollectionRequest =  {
-  name: string | undefined;
-  description: string | undefined;
-  city: string;
-  date: Date | undefined;
-  type: CollectionType;
+export type CollectionRequest = {
+    name: string | undefined;
+    description: string | undefined;
+    city: string;
+    date: Date;
+    type: CollectionType;
 }
 
 export type CollectionPhoto = {
-  id: number;
-  url: string;
+    id: number;
+    url: string;
 }
 
 
 export type UserBasic = {
-  id: string;
-  display_name: string;
-  username: string | null;
+    id: string;
+    display_name: string;
+    username: string | null;
 }
 
 
 export type CollectionResponse = {
-  id: string;
-  photos: CollectionPhoto[]
-  user: UserBasic
+    id: string;
+    photos: CollectionPhoto[]
+    user: UserBasic
 } & CollectionRequest
 
 
 export type UserData = {
-  id: string;
-  username: string | undefined;
-  display_name: string | undefined;
+    id: string;
+    username: string | undefined;
+    display_name: string | undefined;
 }
 
 
 export const cities = [
-  {
-    value: "Antipolo",
-    label: "Antipolo",
-  },
-  {
-    value: "Muntinlupa",
-    label: "Muntinlupa",
-  },
-  {
-    value: "Pasig",
-    label: "Pasig",
-  },
-  {
-    value: "Pasay",
-    label: "Pasay",
-  },
-  {
-    value: "Surigao",
-    label: "Surigao",
-  },
+    {
+        value: "Antipolo",
+        label: "Antipolo",
+    },
+    {
+        value: "Muntinlupa",
+        label: "Muntinlupa",
+    },
+    {
+        value: "Pasig",
+        label: "Pasig",
+    },
+    {
+        value: "Pasay",
+        label: "Pasay",
+    },
+    {
+        value: "Surigao",
+        label: "Surigao",
+    },
 ]
+
+export type UserSearchCollectionRequest = {
+    city: string;
+    from: Date | undefined | null;
+    to: Date | undefined | null;
+}
+
+export type CartItemResponse = {
+    id: number;
+    photo_id: number;
+    photo: CollectionPhoto
+    collection: CollectionRequest
+}
+
+export type CartResponse = {
+    id: number;
+    cart_items: CartItemResponse[];
+}
+
+
+export type OrderResponse = {
+    redirectUrl: string;
+}

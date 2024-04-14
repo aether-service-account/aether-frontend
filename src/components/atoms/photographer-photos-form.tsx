@@ -25,13 +25,19 @@ const filesSchema = typeof FileList !== 'undefined' ?
     z.any().refine(obj => obj && typeof obj === 'object' && 'length' in obj && obj.length > 0, 'File is required.');
 
 
+const logosSchema = typeof FileList !== 'undefined' ?
+    z.instanceof(FileList).refine(files => files.length > 0, 'Logo is required.') :
+    z.any().refine(obj => obj && typeof obj === 'object' && 'length' in obj && obj.length > 0, 'File is required.');
+
+
 const FormSchema = z.object({
     files: filesSchema,
     date: z.date().optional(),
     type: z.enum(collectionTypes),
     name: z.string().optional(),
     description: z.string().optional(),
-    city: z.string()
+    city: z.string(),
+    logo: logosSchema,
 });
 
 
@@ -50,8 +56,8 @@ export default function PhotographerPhotosForm() {
         }
     });
 
-    const upload = async (files: FileList, collection: CollectionRequest) => {
-        const response = await uploadCollectionPhotosOptimized(files, collection);
+    const upload = async (files: FileList, logo: FileList, collection: CollectionRequest) => {
+        const response = await uploadCollectionPhotosOptimized(files, logo, collection);
         toast({
             title: "Photos Upload",
             description: response.message,
@@ -68,11 +74,12 @@ export default function PhotographerPhotosForm() {
             type: data.type,
         }
 
-        void upload(data.files, collection)
+        void upload(data.files, data.logo, collection)
 
     };
 
     const fileRef = form.register("files");
+    const logoRef = form.register("logo");
 
     return <div className="grid w-full max-w-sm items-center gap-1.5">
         <Form {...form}>
@@ -85,9 +92,24 @@ export default function PhotographerPhotosForm() {
                     name="files"
                     render={({field}) => (
                         <FormItem className={""}>
+                            <FormLabel>Collection Photos</FormLabel>
                             <FormControl>
-                                <Input type="file" accept="image/png, image/jpeg, image/gif" placeholder="shadcn"
+                                <Input type="file" accept="image/png, image/jpeg, image/gif" placeholder="collection photos"
                                        multiple {...fileRef}/>
+                            </FormControl>
+                            <FormMessage/>
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="logo"
+                    render={({field}) => (
+                        <FormItem className={""}>
+                            <FormLabel>Logo</FormLabel>
+                            <FormControl>
+                                <Input type="file" accept="image/png" placeholder="logos"
+                                      multiple {...logoRef}/>
                             </FormControl>
                             <FormMessage/>
                         </FormItem>
