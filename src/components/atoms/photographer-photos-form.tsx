@@ -70,6 +70,7 @@ export default function PhotographerPhotosForm() {
             name: data.name,
             description: data.description,
             city: data.city,
+            // @ts-ignore
             date: data.date,
             type: data.type,
         }
