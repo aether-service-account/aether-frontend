@@ -26,6 +26,7 @@ import {format} from "date-fns";
 import {Cross2Icon} from "@radix-ui/react-icons";
 import {checkoutOrder} from "@/services/user/order";
 import {useRouter} from "next/navigation";
+import {useAuth} from "@/context/auth-context";
 
 
 function CartItem({cart_item_id, photo_id, url, city, date, name}: {
@@ -112,6 +113,7 @@ function Cart() {
 }
 
 export const NavigationBar = () => {
+    const { user, isLoading } = useAuth();
     return (
         <nav className={cn("flex justify-between px-3 w-full items-center")}>
             <NavLinks>
@@ -121,7 +123,7 @@ export const NavigationBar = () => {
 
             </NavLinks>
             <NavLinks>
-                <Cart/>
+                {user ? <Cart/> : null}
                 <AuthLink/>
             </NavLinks>
         </nav>
