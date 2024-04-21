@@ -119,7 +119,6 @@ export const NavigationBar = () => {
             <NavLinks>
                 {/*<NavLink name={"Home"} link={"/"} />*/}
                 {/*<NavLink name={"About us"} link={"/"} />*/}
-                {/*<NavLink name={"Contact us"} link={"/"} />*/}
 
             </NavLinks>
             <NavLinks>

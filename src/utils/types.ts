@@ -1,4 +1,5 @@
 import * as querystring from "node:querystring";
+import {z} from "zod";
 
 export interface ReferencePhoto {
     id: number;
@@ -104,3 +105,13 @@ export type CartResponse = {
 export type OrderResponse = {
     redirectUrl: string;
 }
+
+
+export const preSignupSchema = z.object({
+    first_name: z.string(),
+    last_name: z.string(),
+    email_address: z.string(),
+    contact_number: z.string(),
+    city: z.string().optional(),
+    organization: z.string(),
+})
