@@ -5,7 +5,7 @@ import {Metadata} from 'next';
 
 export const metadata: Metadata = {
     title: "Welcome page | AetherLenz",
-    description: "Look for photography captains, ask for majestic shots, and find your photos here in seconds."
+    description: "Look for photography captains, ask for inspiring shots, and find your photos here in seconds."
 };
 
 const CardInfo: React.FC<{ title: string; url: string; order: number; }> = ({title, url, order}) => {
@@ -34,7 +34,7 @@ export default function Home() {
             </div>
             <div className="flex justify-center text-center p-3 my-5">
                 <h3 className="text-2xl  leading-loose text-neutral-800">
-                    Look for photography captains, ask for majestic shots, and find your photos here in seconds.
+                    Look for photography captains, ask for inspiring shots, and find your photos here in seconds.
                 </h3>
             </div>
         </div>

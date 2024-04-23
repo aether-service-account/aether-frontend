@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {cn} from "@/lib/utils";
 
-const  Video = () => {
+const Video = () => {
     return (
         <div className="rounded-3xl overflow-hidden w-fit h-[800px]">
             <video className="w-[900px]" preload="none" muted autoPlay loop>
@@ -30,12 +30,13 @@ const AboutPage = () => {
             <Video/>
             <div className="flex flex-col items-center justify-center px-12  w-full">
                 <div className="max-w-2xl">
-                    <h1 className="text-5xl py-2 leading-loose font-semibold tracking-wide text-sky-500" id="vision">Vision</h1>
+                    <h1 className="text-5xl py-2 leading-loose font-semibold tracking-wide text-sky-500"
+                        id="vision">Vision</h1>
                     <p className="leading-loose font-light tracking-wide text-lg">Aether-Z builds technologies that
                         showcase
                         human creativity,
                         and celebrates human connection.
-                        AetherLenz just born in 2024 that enables passionate photographers offer majestic photography
+                        AetherLenz just born in 2024 that enables passionate photographers offer inspiring photography
                         experience for guests to capture life’s exciting moments.</p>
                 </div>
             </div>
