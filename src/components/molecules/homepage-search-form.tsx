@@ -62,7 +62,8 @@ export default function HomePageSearchForm() {
 
     return <div className="flex justify-center py-12">
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex gap-6 items-center">
+            <form onSubmit={form.handleSubmit(onSubmit)}
+                  className="flex flex-col md:flex md:flex-row gap-6 items-center">
                 <FormField
                     control={form.control}
                     name="dateRange"

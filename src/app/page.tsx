@@ -21,19 +21,19 @@ const CardInfo: React.FC<{ title: string; url: string; order: number; }> = ({tit
 }
 
 export default function Home() {
-    return <main className="container min-h-screen p-24">
+    return <main className="container min-h-screen p-10 md:p-24">
         {/* hero banner */}
         <div className="relative w-full">
             <div className="flex items-center flex-col text-center ">
-                <h1 className="text-6xl font-bold leading-normal text-sky-500">
+                <h1 className="text-5xl md:text-6xl font-bold leading-normal text-sky-500">
                     Discover, Capture, Inspire
                 </h1>
-                <h1 className="text-6xl font-bold leading-normal text-sky-500">
+                <h1 className="text-5xl md:text-6xl font-bold leading-normal text-sky-500">
                     with AetherLenz
                 </h1>
             </div>
             <div className="flex justify-center text-center p-3 my-5">
-                <h3 className="text-2xl  leading-loose text-neutral-800">
+                <h3 className="text-lg md:text-2xl  leading-loose text-neutral-800">
                     Look for photography captains, ask for inspiring shots, and find your photos here in seconds.
                 </h3>
             </div>
@@ -43,7 +43,8 @@ export default function Home() {
             <HomePageSearchForm/>
         </Suspense>
 
-        <div className="w-full flex justify-between items-end mt-4">
+        <div
+            className="w-full gap-4 flex flex-col items-center md:flex md:flex-row md:justify-between md:items-end mt-4">
             <CardInfo url="/images/register.jpg" title="Sign up for free!" order={1}/>
             <CardInfo url="/images/photographer.jpg" title="Approach our photography captains"
                       order={2}/>
